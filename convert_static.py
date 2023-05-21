@@ -8,6 +8,8 @@ import numpy as np
 import math
 import os
 from PIL import Image, ImageEnhance, ImageFilter
+from canny_edge_detection_pitur import *
+import matplotlib.pyplot as plt
  
 # Windows requirement
 os.system("color")
@@ -172,7 +174,7 @@ def rgb(r,g,b):
     return f"\033[{colors[closest_color]}m"
 
 def convert_edge(img,cf,save, factor=2.5):
-
+    # print(img)
     # 1: Enhance image for better output using gaussian blur
     img = img.filter(ImageFilter.GaussianBlur(radius = 3))
 
@@ -247,6 +249,67 @@ def convert_edge(img,cf,save, factor=2.5):
     if(save):
         with open(save,'w') as f:
             f.write(fin)
+
+def convert_edge_cv2(fi,save, factor=2.5):
+    # 1: detect edges using Stefan Pitur's implementation
+    cv2_img = DetectEdges(fi)
+    pil_img = Image.fromarray(cv2_img).convert("L")
+
+
+   
+
+    # 2: Resize
+    width, height = pil_img.size
+    scale = width / (factor*500)
+    width, height = width / scale, height / (scale*2)
+    width, height = int(width), int(height)
+
+    final = pil_img
+    final = pil_img.resize((width,height))
+
+    
+    # 3: Convert to 0s and 1s for bnw
+    img_array_edges = np.array(final).astype(int)
+    # Converting greyscale to black and white using threshold. greyscale>=50 = 1 (black). greyscale < 50 = 0 (white)
+    f_vec = np.vectorize(f3)
+    img_array_edges = f_vec(img_array_edges)
+
+
+
+    
+    fin = ""
+
+    # 4: Take 10x10 tiles and replace with ASCII character
+    inc = 10
+    for li in range(0,math.floor(len(img_array_edges) / inc) * inc,inc): #Floor function to use only even bounds. 
+    #     #Odd bounds have data loss on last col/row
+        for i in range(0,math.floor(len(img_array_edges[li]) / inc) * inc,inc):
+            # Subsetting the tile itself
+            subs = []
+            subs.append([xi[i:i+inc] for xi in img_array_edges[li:li+inc]])
+            subs = np.array(subs)
+            # checking the minimum distance between each character vector and tile vector
+            min = 0
+            min_dist = np.linalg.norm(edge_vectors[0]-subs.flatten())
+            for j in range(0,len(edge_vectors)):
+                new_mind_dist = np.linalg.norm(edge_vectors[j]-subs.flatten())
+
+                if (new_mind_dist<min_dist):
+                    min = j
+                    min_dist = new_mind_dist
+            # replace tile with new character in output string
+            fin = fin + edge_conversions[min]
+        fin = fin + '\n'
+    
+
+    
+# 5: Output to terminal
+    print(fin)
+# 6: Save to output file
+    if(save):
+        with open(save,'w') as f:
+            f.write(fin)
+
 
 
 if __name__ == "__main__":
