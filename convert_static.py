@@ -335,8 +335,9 @@ if __name__ == "__main__":
             convert_grey(Image.open(fi),save,color,factor)
         elif(vars(args)['algorithm']=='edge'):
             convert_edge(Image.open(fi),cf,save,factor)
+        elif(vars(args)['algorithm']=='pitur'):
+            convert_edge_cv2(fi,save,factor)
         else:
-            # print(fi)
             convert_blackwhite(Image.open(fi),save,factor)
 
     except argparse.ArgumentError as e:
