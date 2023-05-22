@@ -52,8 +52,8 @@ For ASCII conversion I found 3 common algorithms that were used.
 - Edge Detection algorithms 
 ## Black/White algorithms:
 Black/White algorithms were by far the easiest to implement and had the best results for conversion. The logic is that pixels that are dark are replaced with a character whereas pixels that are light are replaced with an empty character to create negative space. The contrast from negative space and filled in characters eventually creates shapes which. While you can replace each pixel individually, you can significantly improve the resolution by taking 2x2 tiles of pixels and based on the amount of pixels that are black match them to more intense characters. For example if a 2x2 tile has 4 white pixels then we'd replace it with an empty character. If there is one pixel that is black we'd replace it with a '.'. If all 4 pixels are black we replace it with an @ symbol. 
+
 <p align="center">
-<img width="75%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/27f4a6ff-00e9-4fe9-ac50-650e4671fb07">
-	<em>[This tree represents the possible pixel combinations for a 2x2 tile and the character that replaces them]</em>
+	<img width="75%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/27f4a6ff-00e9-4fe9-ac50-		650e4671fb07">
 </p>
 
