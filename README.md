@@ -8,15 +8,18 @@
 by Sai Coumar
 <br />
 Sections: <br />
+[Introduction](#introduction)<br />
 [Usage](#usage)<br />
 [The Algorithms Behind ASCII Conversion](#the-algorithms-behind-ascii-conversion)<br />
+# Introduction
+Welcome to my ASCII Image Converter! This was a quick little project I made to have some practice with image processing as well as implementing algorithms in python since I'm rusty. I'll cover the usage, how the algorithms I implemented work, as well as some potential improvements that can be made in the future. 
 # Usage
 First make sure all the dependencies are met.
 ```bash
 pip install -r requirements.txt
 ```
 This software uses mostly numpy, opencv, and Pillow, but I added matplotlib to the requirements.txt because I was using it for testing. 
-
+I was also using Python v3.7.6 for this project. 
 <br />
 
 In order to convert an image to ASCII use convert_static.py. convert_static.py requires a --filename argument with the path of the input file. <br /><br />
@@ -43,5 +46,14 @@ python convert_dynamic.py --media [INPUT] --algorithm [ALGORITHM] --factor [size
 ```
 
 # The Algorithms Behind ASCII Conversion
-
+For ASCII conversion I found 3 common algorithms that were used. 
+- Black/White algorithms
+- Greyscale-mapping algorithms
+- Edge Detection algorithms 
+## Black/White algorithms:
+Black/White algorithms were by far the easiest to implement and had the best results for conversion. The logic is that pixels that are dark are replaced with a character whereas pixels that are light are replaced with an empty character to create negative space. The contrast from negative space and filled in characters eventually creates shapes which. While you can replace each pixel individually, you can significantly improve the resolution by taking 2x2 tiles of pixels and based on the amount of pixels that are black match them to more intense characters. For example if a 2x2 tile has 4 white pixels then we'd replace it with an empty character. If there is one pixel that is black we'd replace it with a '.'. If all 4 pixels are black we replace it with an @ symbol. 
+<p align="center">
+<img width="75%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/27f4a6ff-00e9-4fe9-ac50-650e4671fb07">
+	<em>[This tree represents the possible pixel combinations for a 2x2 tile and the character that replaces them]</em>
+</p>
 
