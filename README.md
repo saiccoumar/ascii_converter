@@ -6,7 +6,11 @@
 </p>
 
 by Sai Coumar
-## Usage
+<br />
+Sections: <br />
+[Usage](#usage)<br />
+[The Algorithms Behind ASCII Conversion](#the-algorithms-behind-ascii-conversion)<br />
+# Usage
 First make sure all the dependencies are met.
 ```bash
 pip install -r requirements.txt
@@ -37,4 +41,7 @@ ex.
 ``` bash
 python convert_dynamic.py --media [INPUT] --algorithm [ALGORITHM] --factor [size] --color [COLOR] --save [OUTPUT FILENAME] -cf [CONVOLUTIONAL FILTER]
 ```
+
+# The Algorithms Behind ASCII Conversion
+
 
