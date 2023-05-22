@@ -18,7 +18,7 @@ os.system("color")
 # Pixel threshold function to convert greyscale to bnw
 # for edge detection
 def f3(x):
-    if x<50:
+    if x<6.5:
         return 0
     return 1
 
@@ -71,7 +71,7 @@ def convert_blackwhite(img, factor=2.5):
         fin = fin + '\n'
 # 5: Output to terminal
     return fin 
-# 6: Save to output file
+
     
 
 
@@ -147,7 +147,7 @@ def rgb(r,g,b):
 def convert_edge(img,cf, factor=2.5):
     # print(img)
     # 1: Enhance image for better output using gaussian blur
-    # img = img.filter(ImageFilter.GaussianBlur(radius = 5))
+    img = img.filter(ImageFilter.GaussianBlur(radius = 5))
 
     # 2: Convert to Black and White
     img = img.convert("L")
@@ -175,8 +175,11 @@ def convert_edge(img,cf, factor=2.5):
     width, height = int(width), int(height)
 
     final = img_grey_edge
+    final = ImageEnhance.Brightness(final)
     final = img_grey_edge.resize((width,height))
     # final.show()
+
+    # final = ImageEnhance.Brightness(final)
 
     
     # 5: Convert to 0s and 1s for bnw
@@ -247,7 +250,7 @@ if __name__ == "__main__":
                     image = Image.fromarray(frame).convert("RGB")
                 except:
                     continue
-                # cv2.imshow('Frame',frame)
+                cv2.imshow('Frame',frame)
                 text = ""
                 if(vars(args)['algorithm']=='grey'):
                     text = convert_grey(image,color,factor)
