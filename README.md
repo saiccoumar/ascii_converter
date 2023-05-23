@@ -49,7 +49,7 @@ python convert_dynamic.py --media [INPUT] --algorithm [ALGORITHM] --factor [size
 ```
 
 # The Algorithms Behind ASCII Conversion
-For ASCII conversion I found 3 common algorithms that were used. 
+For ASCII conversion I found 3 common algorithms. 
 - Black/White algorithms
 - Greyscale-mapping algorithms
 - Edge Detection algorithms 
