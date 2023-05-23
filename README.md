@@ -63,7 +63,7 @@ This tree represents all 16 possible combinations of 2x2 pixel tiles. Red repres
 
 As you can see from this tree, the pixel combinations with more pixels filled in typically have larger ASCII characters while the ones with fewer have characters with either smaller or no characters. 
 
-My implementation is as follows:
+My implementation:
 1. Create a dictionary of tuples matching 2x2 pixel combinations (as tuples) to ASCII characters. 
 2. Resize the input image using Pillow functions
 3. Convert the Pillow image to a black and white image of Pillow type 1 image and then into a numpy array
@@ -77,7 +77,7 @@ Greyscale algorithms are a little more complicated and performed marginally slow
  ....________,:;\'`^"l!i><~+_-?][}{1)*#(|/tfjrxnuvczmwqpdbkhaoIXYUJCLQ0OZMW&8%B@$
 ```
 After playing around this is the grey ramp I settled on. Repeating characters in a grey ramp isn't problematic, and I found that I needed to add more low density characters was necessary to create more negative space.<br />
-My implementation is as follows:
+My implementation:
 1. Initialize the chosen grey ramp
 2. Resize the image
 3. Convert the image to a greyscaale type L Pillow image using Pillow functions
@@ -96,7 +96,7 @@ To replace lines...I had to get creative. There are a couple ways to approach th
 <br /> <br />
 My approach worked by taking images of my chosen ASCII characters and then to turn them into vectors. Then, for every tile, I converted the tile into a vector and used the euclidean distance formula to find the character vector that was most similar to the tile vector. I would then add the character matching that vector to my string. 
 
-My implementation is as follows:
+My implementation:
 1. Enhance image for better output using gaussian blur
 2. Convert the image to a greyscaale type L Pillow image using Pillow functions
 3. Apply sobel of laplace convolutional filters to the image
