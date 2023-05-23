@@ -9,7 +9,7 @@ import math
 import os
 from PIL import Image, ImageEnhance, ImageFilter
 from canny_edge_detection_pitur import *
-import matplotlib.pyplot as plt
+
  
 # Windows requirement
 os.system("color")

@@ -1,7 +1,8 @@
 from convert_static import *
 import time
 
-testfile = "test/kitty.webp"
+
+testfile = "test/ascii.png"
 
 img = Image.open(testfile)
 fa = 2.5
@@ -30,9 +31,9 @@ print("Greyscale Execution Time:" + greyscale_time)
 print("Edge Detection Execution Time:" + edge_detection_time)
 
 
-# start = time.time()
-# convert_edge_cv2(testfile,save=None,factor=4)
-# end = time.time()
-# edge_detection_time_pitur = str(end-start)
-# print("Edge Detection Execution Time (Pitur):" + edge_detection_time_pitur)
+start = time.time()
+convert_edge_cv2(testfile,save=None,factor=4)
+end = time.time()
+edge_detection_time_pitur = str(end-start)
+print("Edge Detection Execution Time (Pitur):" + edge_detection_time_pitur)
 

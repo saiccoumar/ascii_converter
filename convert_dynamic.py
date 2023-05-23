@@ -220,6 +220,81 @@ def convert_edge(img,cf, factor=2.5):
 # 7: Output to terminal
     return fin
 
+def convert_edge_bnw(img,cf, factor=2.5):
+    # print(img)
+    # 1: Enhance image for better output using gaussian blur
+    img = img.filter(ImageFilter.GaussianBlur(radius = 5))
+
+    # 2: Convert to Black and White
+    img = img.convert("L")
+    
+
+    # 3: Apply filtering to get edges
+    #Sobel filter is the most common, has the most negative space
+    sobel = (1,0,-1,2,0,-2,1,0,-1)
+    #The laplacian filter has less negative space 
+    laplacian = (-1, -1, -1, -1, 8,-1, -1, -1, -1)
+    #In-built PIL filter has the least negative space and same performance to laplacian
+
+    find_edge = ImageFilter.FIND_EDGES
+    if (cf=='laplace'):
+        img_grey_edge = img.filter(ImageFilter.Kernel((3, 3), laplacian, 1, 0))
+        # img_grey_edge = img.filter(find_edge)
+    else:
+        img_grey_edge = img.filter(ImageFilter.Kernel((3, 3), sobel, 1, 0))
+    # img_grey_edge.show()
+
+    # 4: Resize
+    width, height = img.size
+    scale = width / (factor*100)
+    width, height = width / scale, height / (scale*2)
+    width, height = int(width), int(height)
+
+    final = img_grey_edge
+    # final = ImageEnhance.Brightness(final)
+    final = img_grey_edge.resize((width,height))
+    # final.show()     
+
+    # return convert_blackwhite(final, factor)
+    black_white_chars = {
+    # Format of [(x1,y1),(x2,y1),(x1,y2),(x2,y2)]
+        (False, False, False, False) : ' ', #0 
+        (False, True, False, False) : '.', #1
+        (True, False, False, False) : ',', #1
+        (False, False, True, False) : '\'', #1
+        (False, False, False, True) : '-', #1
+        (True, True, False, False) : ':', #2 
+        (False, False, True, True) : ';', #2 
+        (True, False, True, False) : '|', #2
+        (False, True, False, True) : '\\', #2
+        (False, True, True, False) : '/', #2
+        (True, False, False, True) : '[', #2
+        (False, True, True, True) : ']', #3
+        (True, True, False, True) : 'J', #3
+        (True, False, True, True): 'I', #3 
+        (True, True, True, False) : '0', #3
+        (True, True, True, True) : '@' #4
+    }
+
+# 3: Turn image into array of numbers and convert image to greyscale    
+    # img_array_grey = np.array(img.convert("1")) #Uses black/white 
+# 4: Iterate through every 4 pixels and convert it into an ascii character and append ascii character to string
+    img_array_edges = np.array(final).astype(int)
+    # Converting greyscale to black and white using threshold. greyscale>=50 = 1 (black). greyscale < 50 = 0 (white)
+    f_vec = np.vectorize(f3)
+    img_array_grey = f_vec(img_array_edges)
+
+    fin = ""
+    for li in range(0,math.floor(len(img_array_grey) / 2) * 2,2): #Floor function to use only even bounds. 
+        #Odd bounds have data loss on last col/row
+        for i in range(0,math.floor(len(img_array_grey[li]) / 2.) * 2,2):
+            tu = (img_array_grey[li, i],img_array_grey[li+1, i],img_array_grey[li, i+1],img_array_grey[li+1, i+1])
+            fin = fin + black_white_chars[tu]
+        fin = fin + '\n'
+# 5: Output to terminal
+    return fin 
+    
+
 
 if __name__ == "__main__":
     # Argument Parser to take in command line arguments
@@ -256,6 +331,8 @@ if __name__ == "__main__":
                     text = convert_grey(image,color,factor)
                 elif(vars(args)['algorithm']=='edge'):
                     text = convert_edge(image,cf,factor)
+                elif(vars(args)['algorithm']=='edge-bnw'):
+                    text = convert_edge_bnw(image,cf,factor)
                 else:
                     text = convert_blackwhite(image,factor)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
@@ -285,6 +362,8 @@ if __name__ == "__main__":
                     text = convert_grey(image,color,factor)
                 elif(vars(args)['algorithm']=='edge'):
                     text = convert_edge(image,cf,factor)
+                elif(vars(args)['algorithm']=='edge-bnw'):
+                    text = convert_edge_bnw(image,cf,factor)
                 else:
                     text = convert_blackwhite(image,factor)
                 if cv2.waitKey(1) & 0xFF == ord('q'):
