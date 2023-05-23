@@ -59,7 +59,7 @@ Black/White algorithms were by far the easiest to implement and had the best res
 <p align="center">
 	<img width="75%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/7d86b06f-1463-4102-acd5-e6add6a6ce29">
 </p>
-This tree represents all 16 possible combinations of 2x2 pixel tiles <br />
+This tree represents all 16 possible combinations of 2x2 pixel tiles. Red represents a value of false, and blue represents a value of true. Each level is the next value in the tuple. <br />
 
 As you can see from this tree, the pixel combinations with more pixels filled in typically have larger ASCII characters while the ones with fewer have characters with either smaller or no characters. 
 
@@ -166,7 +166,7 @@ This project was a fun little exercise in algorithms and image processing, and I
                                  ., ,/.[,\'/-, |@@@@@@@@@@@@@@@@@@@@@@@JJ\\J@@@@@@@@@@@@@@@@@0|- .-'                         
                                    '   ,'.['.[,. |@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@I| ., .                            
                                     ' ,' . ,'.['., ||@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@00|'   ,                                
-                                       .  ,' - .''- .-'|I@@@@@@@@@@@@@@@@@@@000||,,,  ---' ,  ,                              
+                                       .  ,' - .''- .-ftree'|I@@@@@@@@@@@@@@@@@@@000||,,,  ---' ,  ,                              
                                   ..     , ['./--'- . -    ,,,,,,,,,,' .-     ----,.[,[-,/.,'  .'----                        
                                -'-.\' ,'-,:,['.[,[,['/.[,['..\-.[--./.[--;'/;;-,/-' ,' ,' ''''.-;/00\'                       
                               - /JI[J' ,,' ,,,' ,,'-['.['.:/'.,/-,['-'.,[-['..['.,-;@@@]\' [' .  0J00 ,'                     
