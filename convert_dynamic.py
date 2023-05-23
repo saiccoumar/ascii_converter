@@ -88,7 +88,7 @@ def convert_grey(img, color='white', factor=2.5):
     img = img.resize((int(width), int(height)), Image.ANTIALIAS)
 # 3: Turn image into array of numbers and convert image to greyscale    
     # img_array_grey = np.array(img.convert("L")) #Uses greyscaling
-    img_array = np.array(img)
+    img_array = np.array(img.convert("RGB"))
     img_array_grey = np.array(img.convert("L"))
 # 4: Mapping greyscaled value to the grey_ramp
     def map(x):
