@@ -24,7 +24,7 @@ pip install -r requirements.txt
 This software uses mostly numpy, opencv, and Pillow, but I added matplotlib to the requirements.txt because I was using it for testing. 
 I was also using Python v3.7.6 for this project. 
 <br />
-
+## Image Conversion
 In order to convert an image to ASCII use convert_static.py. convert_static.py requires a --filename argument with the path of the input file. <br /><br />
 You can specify --algorithm or -a to specify the ASCII conversion algorithm. The options are 'grey', 'edge', 'pitur', and 'bnw'. If no algorithm is specified it will use bnw by default. <br /><br />
 You can use the -f or --factor arguments followed by an argument between 0 and 6 to specify the size of the output in the terminal. The default factor is 2.5. You'll likely need to resize your window anyway to see the entire image.<br /><br />
@@ -36,7 +36,7 @@ ex.
 ``` bash
 python convert_static.py --filename [INPUT FILENAME] --algorithm [ALGORITHM] --factor [size] -c --save [OUTPUT FILENAME] -cf [CONVOLUTIONAL FILTER]
 ```
-
+## Video Conversion
 In order to convert a video or camera input to ASCII use convert_dynamic.py. convert_dynamic.py requires a --media argument with the path of the input file; if the input is specified to cam then camera input will be used instead. <br /><br />
 You can specify --algorithm or -a to specify the ASCII conversion algorithm. The options are 'grey', 'edge','edge-bnw, and 'bnw'. If no algorithm is specified it will use bnw by default.<br /><br />
 You can use the -f or --factor arguments followed by an argument between 0 and 6 to specify the size of the output in the terminal. You'll likely need to resize your window anyway to see the entire image. The default factor is 2.5.<br /><br />
