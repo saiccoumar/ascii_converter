@@ -5,6 +5,7 @@
 	<em>[https://en.wikipedia.org/wiki/SAS_Institute](https://commons.wikimedia.org/wiki/File:SVG_ASCII_logo.svg)</em>
 </p>
 
+
 by Sai Coumar
 <br />
 Sections: <br />
@@ -117,6 +118,11 @@ When researching for this project I found a lot of great resources that I defini
 4. [AsciiArtist](https://github.com/JuliaPoo/AsciiArtist): This repository is a project that uses a convolutional neural network for ASCII conversion, which I briefly mentioned as a possibility in the previous section. I didn't use this algorithm but it's a nice alternative approach that I didn't cover which I think is worth checking out.
 # Conclusion:
 This project was a fun little exercise in algorithms and image processing, and I really enjoyed working with modules like openCV and PIL. ASCII art algorithms can be difficult to digest but I tried to show a diverse range of implementations and features used to make ASCII art. If anyone has suggestions or corrections feel free to email me about it at sai.c.coumar1@gmail.com, and I hope others might've found this project useful as well! 
+
+<p align="center">
+<img width="50%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/3617c295-d8b7-456e-96b5-5fb4f023a274">
+	
+</p>
 
 
 
