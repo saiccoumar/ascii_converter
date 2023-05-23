@@ -120,14 +120,22 @@ When researching for this project I found a lot of great resources that I defini
 This project was a fun little exercise in algorithms and image processing, and I really enjoyed working with modules like openCV and PIL. ASCII art algorithms can be difficult to digest but I tried to show a diverse range of implementations and features used to make ASCII art. If anyone has suggestions or corrections feel free to email me about it at sai.c.coumar1@gmail.com, and I hope others might've found this project useful as well! 
 
 <p align="center">
-<img width="50%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/3617c295-d8b7-456e-96b5-5fb4f023a274">
+<img width="100%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/3617c295-d8b7-456e-96b5-5fb4f023a274">
 	
 </p>
 
 
-
+<p align="center">
+<img width="100%" height="auto" src="https://github.com/saiccoumar/ascii_converter/assets/55699636/bb6fd06a-9aa3-48b5-ad08-c92bf1373b9a">
+	
+</p>
                                                                                                                              
-                                                                                                                 .- .        
+
+
+
+
+
+                                                              .- .        
                                                                                                                 ,.['.['      
                                                                                                                ,['.['...     
                                                                                                               ' ,['.:/ -     
