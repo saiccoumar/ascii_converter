@@ -79,9 +79,29 @@ My implementation is as follows:
 2. Resize the image
 3. Convert the image to a greyscaale type L Pillow image using Pillow functions
 4. Define the mapping function to map a pixel intensity to the grey ramp
-5. Iterate through every pixel in the image and replace the character with a matching character
+5. Iterate through every pixel in the image and replace the character with a matching character <br />
 
 Within this function I also chose to implement the ability to color the pixels. I did this using ANSI codes and a helper function to convert the RGB values of a pixel to an ANSI code. ANSI escape codes are a special escape code that can be used to change the color and background of text by adding them right before the text and (most) terminals are capable of rendering text using ANSI codes to print in color. Using ANSI codes, an inbuilt system feature, allowed me to avoid using more unnecessary dependencies. My default text editor couldn't render ANSI codes so to view the ASCII art in color you can use the cat command in bash.
 
 ## Edge Detection Algorithms:
-The final (and most challenging) algorithm was edge detection for ASCII art. While greyscale and black/white algorithms make art by shading with ASCII characters, edge detection aims to detect lines of shapes and then replace those shapes with lines to make line art. This algorithm was by and far way more difficult. There are two parts of this algorithm: detect edges and then the line replacement. Edge detection alone is a complicated endeavor. The process of edge detection begins applying a gaussian blur to smooth the image. This provides much more defined lines later. After that we pass the image through a convolutional filter-either a sobel filter or a laplacian filter- which outputs an image with white edges and black negative space. 
+The final (and most challenging) algorithm was edge detection for ASCII art. While greyscale and black/white algorithms make art by shading with ASCII characters, edge detection aims to detect lines of shapes and then replace those shapes with lines to make line art. This algorithm was by and far way more difficult. <br />
+
+There are two parts of this algorithm: detect edges and then the line replacement.
+<br /> <br />
+Edge detection alone is a complicated endeavor. The process of edge detection begins applying a gaussian blur to smooth the image. This provides much more defined lines later. After that we pass the image through a convolutional filter-either a sobel filter or a laplacian filter - which outputs an image with white edges and black negative space. After this we apply non-max suppression to thin the edges, double thresholding to sort the pixels into strong, weak, and irrelevant, and then hysteresis for the final product. <br />
+To replace lines...I had to get creative. There are a couple ways to approach this, but all have a common denominator in that, similar to black/white algorithms, we take a tile of pixels from our image with edges and replace them with a matching character. The most naive implementation is essentially to apply black/white algorithms on the outputted image with edges. A particularly difficult but effective method is to classify the tile using a CNN with a character, but that was more work than I was interested in and extremely computationally intensive.
+<br /> <br />
+My approach worked by taking images of my chosen ASCII characters and then to turn them into vectors. Then, for every tile, I converted the tile into a vector and used the euclidean distance formula to find the character vector that was most similar to the tile vector. I would then add the character matching that vector to my string. 
+
+My implementation is as follows:
+1. Enhance image for better output using gaussian blur
+2. Convert the image to a greyscaale type L Pillow image using Pillow functions
+3. Apply sobel of laplace convolutional filters to the image
+4. Resize the Image
+5. Convert the Image to 0s and 1s for a black and white image
+6. Take 10x10 tiles and replace with ASCII character using Euclidean Distance Formulas
+
+You may notice that I missed some steps of edge detection in my implementation. Truthfully, the most important step is to apply the sobel filtering, and since I was using Pillow, applying non-max suppression, hysteresis, and double thresholding was difficult as well as EXTREMELY computationally intensive. I found a really good repository from user Stefan Pitur which uses openCV and does all the steps of edge detection (and quite well) but while testing and comparing the time to compute edges using my implementation vs Pitur's, his appeared to be about 20 times slower. My implementation was satisfactory on images with relatively hard edges and was much more viable for real time conversion. This is likely due to how Pillow is implemented as a module optimized for image processing; I think it is possible to make Pitur's implementation more optimized for the best performance as well but I wasn't interested in doing that.  
+<br /><br />
+For video conversions, I also implemented the naive black/white conversion of the edge detection because it could render output much faster as well. This was as simple as gaussian blurring, convoluting with sobel/laplace filters, and then using the black/white conversion algorithm on the convoluted image. This had the best edge detection performance for videos (I recommend trying it with some anime clips).
+
