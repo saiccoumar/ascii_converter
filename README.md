@@ -80,7 +80,7 @@ After playing around this is the grey ramp I settled on. Repeating characters in
 My implementation:
 1. Initialize the chosen grey ramp
 2. Resize the image
-3. Convert the image to a greyscaale type L Pillow image using Pillow functions
+3. Convert the image to a greyscale type L Pillow image using Pillow functions
 4. Define the mapping function to map a pixel intensity to the grey ramp
 5. Iterate through every pixel in the image and replace the character with a matching character <br />
 
