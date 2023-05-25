@@ -41,15 +41,12 @@ def make_char_vectors(fi):
     te = ImageEnhance.Sharpness(te).enhance(5)
     te = ImageEnhance.Contrast(te).enhance(9)
     te = te.convert("L")
-    # te.show()
     te = np.array(te)
-    # print(te)
-    # te = te.flatten()
    
     f_vec = np.vectorize(f2)
     te = f_vec(te)
     print(te)
-    # print(te.shape)
+    
     te = te.flatten()
     return te
 
@@ -122,17 +119,16 @@ def convert_blackwhite(img, save, factor=2.5):
 def convert_grey(img, save, color=True, factor=2.5):
 # 1: initialize grey_ramp that chooses characters to replace
     grey_ramp = ' ....________,:;\'`^"l!i><~+_-?][}{1)*#(|/tfjrxnuvczmwqpdbkhaoIXYUJCLQ0OZMW&8%B@$'
+ # Alternate Grey Ramp
     # grey_ramp = '@MV%#:;*+=-:...___   '
     # grey_ramp = grey_ramp[::-1]
-    # print(grey_ramp)
+
 # 1: Resize the image
     width, height = img.size
     scale = width / (factor*50)
     width, height = width / scale, height / (scale*2)
     img = img.resize((int(width), int(height)), Image.ANTIALIAS)
 # 3: Turn image into array of numbers and convert image to greyscale    
-    # img_array_grey = np.array(img.convert("L")) #Uses greyscaling
-    img.convert("RGB").show()
     img_array = np.array(img.convert("RGB")) 
     img_array_grey = np.array(img.convert("L"))
 # 4: Mapping greyscaled value to the grey_ramp
@@ -196,7 +192,7 @@ def convert_edge(img,cf,save, factor=2.5):
         # img_grey_edge = img.filter(find_edge)
     else:
         img_grey_edge = img.filter(ImageFilter.Kernel((3, 3), sobel, 1, 0))
-    # img_grey_edge.show()
+
 
     # 4: Resize
     width, height = img.size
@@ -206,7 +202,7 @@ def convert_edge(img,cf,save, factor=2.5):
 
     final = img_grey_edge
     final = img_grey_edge.resize((width,height))
-    # final.show()
+
 
     
     # 5: Convert to 0s and 1s for bnw
@@ -214,10 +210,7 @@ def convert_edge(img,cf,save, factor=2.5):
     # Converting greyscale to black and white using threshold. greyscale>=50 = 1 (black). greyscale < 50 = 0 (white)
     f_vec = np.vectorize(f3)
     img_array_edges = f_vec(img_array_edges)
-    # plt.imsave('output.png', img_array_edges, cmap='Greys')
 
-
-    
     fin = ""
 
     # 6: Take 10x10 tiles and replace with ASCII character
