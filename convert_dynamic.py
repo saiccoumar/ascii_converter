@@ -78,16 +78,16 @@ def convert_blackwhite(img, factor=2.5):
 def convert_grey(img, color='white', factor=2.5):
 # 1: initialize grey_ramp that chooses characters to replace
     grey_ramp = ' ....________,:;\'`^"l!i><~+_-?][}{1)*#(|/tfjrxnuvczmwqpdbkhaoIXYUJCLQ0OZMW&8%B@$'
+ # Alternate grey_ramp
     # grey_ramp = '@MV%#:;*+=-:...___   '
     # grey_ramp = grey_ramp[::-1]
-    # print(grey_ramp)
+
 # 1: Resize the image
     width, height = img.size
     scale = width / (factor*50)
     width, height = width / scale, height / (scale*2)
     img = img.resize((int(width), int(height)), Image.ANTIALIAS)
 # 3: Turn image into array of numbers and convert image to greyscale    
-    # img_array_grey = np.array(img.convert("L")) #Uses greyscaling
     img_array = np.array(img.convert("RGB"))
     img_array_grey = np.array(img.convert("L"))
 # 4: Mapping greyscaled value to the grey_ramp
@@ -145,7 +145,6 @@ def rgb(r,g,b):
     return f"\033[{colors[closest_color]}m"
 
 def convert_edge(img,cf, factor=2.5):
-    # print(img)
     # 1: Enhance image for better output using gaussian blur
     img = img.filter(ImageFilter.GaussianBlur(radius = 5))
 
@@ -166,7 +165,7 @@ def convert_edge(img,cf, factor=2.5):
         # img_grey_edge = img.filter(find_edge)
     else:
         img_grey_edge = img.filter(ImageFilter.Kernel((3, 3), sobel, 1, 0))
-    # img_grey_edge.show()
+
 
     # 4: Resize
     width, height = img.size
@@ -177,9 +176,6 @@ def convert_edge(img,cf, factor=2.5):
     final = img_grey_edge
     final = ImageEnhance.Brightness(final)
     final = img_grey_edge.resize((width,height))
-    # final.show()
-
-    # final = ImageEnhance.Brightness(final)
 
     
     # 5: Convert to 0s and 1s for bnw
@@ -187,7 +183,6 @@ def convert_edge(img,cf, factor=2.5):
     # Converting greyscale to black and white using threshold. greyscale>=50 = 1 (black). greyscale < 50 = 0 (white)
     f_vec = np.vectorize(f3)
     img_array_edges = f_vec(img_array_edges)
-    # plt.imsave('output.png', img_array_edges, cmap='Greys')
 
 
     
@@ -251,10 +246,10 @@ def convert_edge_bnw(img,cf, factor=2.5):
     width, height = int(width), int(height)
 
     final = img_grey_edge
-    # final = ImageEnhance.Brightness(final)
     final = img_grey_edge.resize((width,height))
-    # final.show()     
 
+ 
+   # 5: Tuples that map all 16 possible combinations of 2x2 pixels to an ASCII character
     # return convert_blackwhite(final, factor)
     black_white_chars = {
     # Format of [(x1,y1),(x2,y1),(x1,y2),(x2,y2)]
@@ -276,9 +271,7 @@ def convert_edge_bnw(img,cf, factor=2.5):
         (True, True, True, True) : '@' #4
     }
 
-# 3: Turn image into array of numbers and convert image to greyscale    
-    # img_array_grey = np.array(img.convert("1")) #Uses black/white 
-# 4: Iterate through every 4 pixels and convert it into an ascii character and append ascii character to string
+# 6: Iterate through every 4 pixels and convert it into an ascii character and append ascii character to string
     img_array_edges = np.array(final).astype(int)
     # Converting greyscale to black and white using threshold. greyscale>=50 = 1 (black). greyscale < 50 = 0 (white)
     f_vec = np.vectorize(f3)
@@ -291,7 +284,7 @@ def convert_edge_bnw(img,cf, factor=2.5):
             tu = (img_array_grey[li, i],img_array_grey[li+1, i],img_array_grey[li, i+1],img_array_grey[li+1, i+1])
             fin = fin + black_white_chars[tu]
         fin = fin + '\n'
-# 5: Output to terminal
+# 7: Output to terminal
     return fin 
     
 
