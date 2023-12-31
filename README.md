@@ -12,7 +12,7 @@ Sections: <br />
 [Usage](#usage)<br />
 [The Algorithms Behind ASCII Conversion](#the-algorithms-behind-ascii-conversion)<br />
 [Potential Improvements](#potential-improvements)<br />
-[Citations](#citations)<br />
+[Citations](#citations-and-resources)<br />
 [Conclusion](#conclusion)<br />
 # Introduction
 Welcome to my ASCII Image Converter! This was a quick little project I made to have some practice with image processing as well as implementing algorithms in python since I'm rusty. I'll cover the usage, how the algorithms I implemented work, as well as some potential improvements that can be made in the future. 
