@@ -98,7 +98,7 @@ My approach worked by taking images of my chosen ASCII characters and then to tu
 
 My implementation:
 1. Enhance image for better output using gaussian blur
-2. Convert the image to a greyscaale type L Pillow image using Pillow functions
+2. Convert the image to a greyscale type L Pillow image using Pillow functions
 3. Apply sobel of laplace convolutional filters to the image
 4. Resize the Image
 5. Convert the Image to 0s and 1s for a black and white image
